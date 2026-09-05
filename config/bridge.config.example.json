@@ -1,0 +1,39 @@
+{
+  "server": {
+    "host": "127.0.0.1",
+    "port": 8787,
+    "maxBodyBytes": 65536
+  },
+  "access": {
+    "teamDomain": "https://<your-cloudflare-team>.cloudflareaccess.com",
+    "audience": "<the Access application AUD tag>",
+    "jwksCacheSeconds": 600
+  },
+  "sql": {
+    "server": "<sql-server-hostname-or-ip>",
+    "port": 1433,
+    "database": "<database name>",
+    "user": "hub_reader",
+    "password": "<do not put it here: set BRIDGE_SQL_PASSWORD in the service environment>",
+    "encrypt": true,
+    "trustServerCertificate": false,
+    "connectTimeoutMs": 15000,
+    "poolMax": 4
+  },
+  "limits": {
+    "rowCap": 5000,
+    "queryTimeoutMs": 30000,
+    "maxStatementLength": 8000,
+    "rateLimitPerMinute": 60
+  },
+  "log": {
+    "path": "C:\\ProgramData\\crdbm-sql-bridge\\query.jsonl",
+    "maxBytes": 10485760,
+    "keep": 10,
+    "includeStatementText": true
+  },
+  "health": {
+    "requireAccessJwt": false
+  },
+  "allowlistFile": "allowlist.example.json"
+}

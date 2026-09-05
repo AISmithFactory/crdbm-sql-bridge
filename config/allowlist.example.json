@@ -1,0 +1,5 @@
+[
+  "dbo.ExampleProjects",
+  "dbo.ExampleProjectLines",
+  "reporting.ExampleClientView"
+]
