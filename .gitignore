@@ -1,0 +1,9 @@
+node_modules/
+npm-debug.log*
+*.log
+*.jsonl
+*.jsonl.[0-9]*
+config/bridge.config.json
+config/allowlist.json
+service/*.exe
+.env

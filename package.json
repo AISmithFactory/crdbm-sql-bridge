@@ -1,0 +1,27 @@
+{
+  "name": "crdbm-sql-bridge",
+  "version": "0.1.0",
+  "description": "Localhost-only, SELECT-only read bridge from the CONIX RDBM hub to an on-premises SQL Server, behind Cloudflare Access.",
+  "license": "MIT",
+  "private": false,
+  "type": "commonjs",
+  "main": "src/index.js",
+  "bin": { "crdbm-sql-bridge": "src/index.js" },
+  "engines": { "node": ">=20.11" },
+  "scripts": {
+    "start": "node src/index.js",
+    "check": "node src/index.js --check",
+    "lint": "eslint .",
+    "test": "node --test"
+  },
+  "dependencies": {
+    "jose": "^6.2.12",
+    "mssql": "^12.7.0",
+    "node-sql-parser": "^5.4.0"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.10.0",
+    "eslint": "^9.10.0"
+  },
+  "repository": { "type": "git", "url": "git+https://github.com/AISmithFactory/crdbm-sql-bridge.git" }
+}

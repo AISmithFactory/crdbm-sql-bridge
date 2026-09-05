@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+  WinSW service definition for the CONIX SQL bridge.
+
+  Copy this file to service\crdbm-sql-bridge.xml, put WinSW-x64.exe beside it
+  renamed to crdbm-sql-bridge.exe, and fill in the four paths below. The binary
+  is not vendored in this repository: download it yourself from the WinSW
+  releases page so that what you install is a file you fetched and can check.
+
+  Every value in angle brackets is a placeholder. docs/install-windows.md has
+  the commands.
+-->
+<service>
+  <id>crdbm-sql-bridge</id>
+  <name>CONIX SQL bridge</name>
+  <description>Localhost-only read bridge from the CONIX hub to SQL Server. SELECT only, allowlisted tables, Cloudflare Access required.</description>
+
+  <executable>&lt;C:\Program Files\nodejs\node.exe&gt;</executable>
+  <arguments>"&lt;C:\Program Files\crdbm-sql-bridge\src\index.js&gt;" --config "&lt;C:\ProgramData\crdbm-sql-bridge\bridge.config.json&gt;"</arguments>
+  <workingdirectory>&lt;C:\Program Files\crdbm-sql-bridge&gt;</workingdirectory>
+
+  <startmode>Automatic</startmode>
+  <onfailure action="restart" delay="10 sec" />
+  <onfailure action="restart" delay="60 sec" />
+  <resetfailure>1 hour</resetfailure>
+
+  <!--
+    Service stdout and stderr only. The query log is written by the bridge
+    itself to the path in "log" in the config file and rotates on its own.
+  -->
+  <logpath>&lt;C:\ProgramData\crdbm-sql-bridge\service-logs&gt;</logpath>
+  <log mode="roll-by-size">
+    <sizeThreshold>10240</sizeThreshold>
+    <keepFiles>8</keepFiles>
+  </log>
+
+  <!--
+    The SQL password. Uncomment this ONLY if you have chosen option A in
+    docs/install-windows.md; anything written here is stored in cleartext in
+    this file, so the file must then be ACL'd to the service account and
+    administrators. Option B, the password in the ACL'd config file, is the
+    recommendation.
+  -->
+  <!-- <env name="BRIDGE_SQL_PASSWORD" value="&lt;the hub_reader password&gt;" /> -->
+</service>
